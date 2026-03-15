@@ -1,73 +1,25 @@
-# React + TypeScript + Vite
+概要
+  ReactとTypeScriptを用いて、ブラウザ上で3Dコンテンツを表示・操作できるWebアプリケーションを作成しました。3D描画にはThree.js系のライブラリであるReact Three Fiberを使用しています。
+  3Dオブジェクトをブラウザ上で表示し、コメント投稿機能、投稿時に文字色を指定することで、画面上に表示されるコメントの色を変更できるようになっています。
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+使用技術
+  ・React
+  ・TypeScript
+  ・React Three Fiber
 
-Currently, two official plugins are available:
+状態管理
+  コメントの表示や文字色の指定はReact Hooks（useState）を用いて管理しています。
+  ユーザー操作に応じて状態を更新し、画面にリアルタイムで反映されるように実装しています。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+主な機能
+  ・3Dオブジェクトの表示
+  ・コメント投稿機能
+  ・コメント文字色の変更機能
 
-## React Compiler
+工夫した点
+  Reactのコンポーネント構成を意識し、3D表示部分とUI操作部分を分離して実装しました。また、コメント投稿時に色を指定できる機能を追加することで、ユーザーが視覚的に分かりやすくコメントを表示できるようにしました。
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+今後の改善点
+  ・APIを利用したコメントデータの永続化
+  ・UIの改善
+  ・パフォーマンス最適化
