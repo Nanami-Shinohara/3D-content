@@ -1,11 +1,13 @@
 import type { FC } from "react";
 import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import type { CommentType } from "../../types/types";
 
-const Comments: FC<CommentType> = ({ text, x, y, z, color }) => {
+const CommentScene: FC<CommentType> = ({ text, x, y, z, color }) => {
   const ref = useRef<any>(null);
+
+  const position = useMemo(() => [x, y, z], [x, y, z]);
 
   useFrame((_, delta) => {
     ref.current.position.z += delta * 2;
@@ -18,7 +20,7 @@ const Comments: FC<CommentType> = ({ text, x, y, z, color }) => {
   return (
     <Text
       ref={ref}
-      position={[x, y, z]}
+      position={position as [x: number, y: number, z: number]}
       fontSize={0.5}
       color={color}
       anchorX="center"
@@ -29,4 +31,4 @@ const Comments: FC<CommentType> = ({ text, x, y, z, color }) => {
   );
 };
 
-export default Comments;
+export default CommentScene;

@@ -1,43 +1,22 @@
 import type { FC } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useState } from "react";
-import type { CommentType } from "../../types/types";
 import ColorPalette from "../Common/ColorPallette";
 import Button from "../Common/Button";
-import Comments from "./Commonets";
+import CommentScene from "./CommentScene";
+import { useComments } from "../../hooks/useComments";
 
 const ThreeComment: FC = () => {
-  const [comments, setComments] = useState<CommentType[]>([
-    { id: "1", text: "888888", x: -2, y: 1, z: -10, color: "#ffffff" },
-    { id: "2", text: "草", x: 0, y: 0, z: -12, color: "#d31313" },
-    { id: "3", text: "すごい", x: 2, y: -1, z: -14, color: "#bbe923" },
-  ]);
-
   const [input, setInput] = useState<string>("");
   const [selectColor, setSelectColor] = useState<string>("#ffffff");
 
-  const addComment = () => {
-    if (!input) return;
-    setComments((prev) => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
-        text: input,
-        x: Math.random() * 4 - 2,
-        y: Math.random() * 2 - 1,
-        z: -10,
-        color: selectColor,
-      },
-    ]);
-
-    setInput("");
-  };
+  const { comments, addComment } = useComments();
 
   return (
     <div style={{ height: "100%", background: "black" }}>
       <Canvas camera={{ position: [0, 0, 5] }}>
         {comments.map((c) => (
-          <Comments key={c.id} {...c} />
+          <CommentScene key={c.id} {...c} />
         ))}
       </Canvas>
 
@@ -60,7 +39,7 @@ const ThreeComment: FC = () => {
           placeholder="コメント入力"
         />
         <Button
-          onClick={() => addComment()}
+          onClick={() => addComment(input, selectColor)}
           sx={{
             backgroundColor: "#ffffff",
             color: "#000000",
