@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useState } from "react";
-import type { CommentType } from "../types/types";
-import Comments from "../component/Comments/Commonets";
-import ColorPalette from "../component/Common/ColorPallette";
-import Button from "../component/Common/Button";
+import type { CommentType } from "../../types/types";
+import ColorPalette from "../Common/ColorPallette";
+import Button from "../Common/Button";
+import Comments from "./Commonets";
 
 const ThreeComment: FC = () => {
   const [comments, setComments] = useState<CommentType[]>([
@@ -54,7 +54,7 @@ const ThreeComment: FC = () => {
           setSelectColor={setSelectColor}
         />
         <input
-          style={{width: "250px", height: "33px"}}
+          style={{ width: "250px", height: "33px" }}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="コメント入力"
